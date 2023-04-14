@@ -1,17 +1,23 @@
 import http from "node:http";
-import { users } from "./mocks/users.js";
+import { URL } from "node:url";
+import { routes } from "./routes/routes.js";
 
 const PORT = 3000;
 const hostname = 'localhost'
 
 const server = http.createServer((request, response) =>{
-  if (request.method === 'GET' && request.url === '/users') {
-    response.writeHead(200, {'content-type' : 'application/json'});
-    response.end(JSON.stringify(users))
+  const parsedURL = new URL(`http://${hostname}:${PORT}${request.url}`)
+
+  const route = routes.find(routeObj => (
+    routeObj.endpoint === parsedURL.pathname && routeObj.method === request.method
+  ))
+  if (route) {
+    request.query = Object.fromEntries(parsedURL.searchParams);
+    route.handler(request, response);
   } else {
-    response.writeHead(400, {'content-type' : 'text/html'});
+    response.writeHead(404, {'content-type' : 'text/html'});
     response.end(`Cannot ${request.method} ${request.url}`)
   }
 })
 
-server.listen(PORT, hostname, () => console.log('Server running'))
+server.listen(PORT, hostname, () => console.log(`🚀 Server running at http://${hostname}:${PORT}`))
