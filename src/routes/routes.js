@@ -1,10 +1,15 @@
-import { listUsers } from "../controllers/UserController.js";
+import { getUserById, listUsers } from "../controllers/UserController.js";
 
 export const routes = [
   {
     endpoint: '/users',
     method: 'GET',
     handler: listUsers
+  },
+  {
+    endpoint: '/users/:id',
+    method: 'GET',
+    handler: getUserById
   },
   {
     endpoint: '/users',

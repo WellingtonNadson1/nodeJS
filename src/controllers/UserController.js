@@ -17,6 +17,19 @@ export const listUsers = (request, response) =>{
   response.end(JSON.stringify(users));
 }
 
+export const getUserById = (request, response) =>{
+  const { id } = request.params;
+  const user = users.find(user => user.id === id);
+
+  if (user) {
+    response.writeHead(200, {'content-type' : 'application/json'});
+    response.end(JSON.stringify(user))
+  } else {
+    response.writeHead(404, {'content-type' : 'text/html'});
+    response.end('<h2>User not found</h2>')
+  }
+}
+
 // Update
 
 
