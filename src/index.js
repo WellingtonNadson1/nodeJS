@@ -1,5 +1,6 @@
 import http from "node:http";
 import { URL } from "node:url";
+import { bodyParser } from "./helpers/bodyParser.js";
 import { routes } from "./routes/routes.js";
 
 const PORT = 3000;
@@ -24,7 +25,17 @@ const server = http.createServer((request, response) =>{
   if (route) {
     request.query = Object.fromEntries(parsedURL.searchParams);
     request.params = { id };
-    route.handler(request, response);
+    response.send = (statusCode, body) =>{
+      response.writeHead(statusCode, {'content-type' : 'text/html'});
+      response.end(JSON.stringify(body));
+    }
+    if (['POST', 'PUT', 'PATCH'].includes(request.method)) {
+      bodyParser(request, response, () =>{
+        route.handler(request, response)
+      })
+    } else {
+      route.handler(request, response);
+    }
   } else {
     response.writeHead(404, {'content-type' : 'text/html'});
     response.end(`Cannot ${request.method} ${request.url}`)

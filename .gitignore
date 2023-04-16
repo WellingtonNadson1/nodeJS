@@ -1,0 +1,69 @@
+# Arquivos e pastas gerados pelo sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de build e saída de compilação
+node_modules/
+dist/
+build/
+*.log
+*.swp
+
+# Arquivos de configuração e chaves de acesso
+.env
+.env.local
+.env.development
+.env.production
+*.pem
+*.key
+*.pub
+
+# Arquivos de dependências de gerenciador de pacotes
+yarn.lock
+package-lock.json
+
+# Arquivos de IDE e editor de texto
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Outros arquivos e pastas específicas do projeto
+*.tmp
+*.bak
+*.backup
+*.orig
+*.tmp
+*.swp
+*.zip
+*.tar.gz
+*.tar.bz2
+*.rar
+*.gz
+*.bz2
+*.7z
+*.exe
+*.dll
+*.so
+*.dylib
+*.bin
+*.dmg
+*.iso
+*.jar
+*.war
+*.ear
+*.class
+*.iml
+*.log
+*.npm-debug.log*
+*.stackdump
+*.tmp
+*.pid
+*.pid.lock
+*.log
+*.log.*
+*.log/
+*.sock
+*.min.css
+*.min.js
+*.min.js.map

@@ -1,7 +1,20 @@
+import { v4 as uuidv4 } from 'uuid';
 import { users } from "../mocks/users.js";
 
-// Create
 
+// Create
+export const createUser = (request, response) =>{
+  const { body } = request;
+  // const lastUser = users[users.length -1].id
+  const newUser = {
+    id:  uuidv4(),
+    name: body.name,
+    email: body.email,
+    status: body.status 
+  }
+  users.push(newUser);
+  response.send(201, newUser)
+}
 
 
 // Read
@@ -13,21 +26,18 @@ export const listUsers = (request, response) =>{
     }
     return a.id > b.id ? 1 : -1;
   })
-  response.writeHead(200, {'Content-type' : 'application/json'})
-  response.end(JSON.stringify(users));
+  response.send(200, sortedUsers);
 }
 
 export const getUserById = (request, response) =>{
   const { id } = request.params;
   const user = users.find(user => user.id === id);
 
-  if (user) {
-    response.writeHead(200, {'content-type' : 'application/json'});
-    response.end(JSON.stringify(user))
-  } else {
-    response.writeHead(404, {'content-type' : 'text/html'});
-    response.end('<h2>User not found</h2>')
+  if (!user) {
+    return response.send(404, { error: 'User Not Found!'});
   }
+  response.send(200, user);
+  
 }
 
 // Update

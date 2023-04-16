@@ -1,6 +1,6 @@
 {
   "name": "nodejs",
-  "private":"true",
+  "private": "true",
   "type": "module",
   "version": "1.0.0",
   "description": "",
@@ -10,5 +10,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "uuid": "^9.0.0"
+  }
 }

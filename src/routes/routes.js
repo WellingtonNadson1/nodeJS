@@ -1,4 +1,4 @@
-import { getUserById, listUsers } from "../controllers/UserController.js";
+import { createUser, getUserById, listUsers } from "../controllers/UserController.js";
 
 export const routes = [
   {
@@ -14,7 +14,7 @@ export const routes = [
   {
     endpoint: '/users',
     method: 'POST',
-    handler: listUsers
+    handler: createUser
   },
   {
     endpoint: '/users/:id',
