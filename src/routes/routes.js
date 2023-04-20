@@ -1,4 +1,4 @@
-import { createUser, getUserById, listUsers } from "../controllers/UserController.js";
+import { createUser, deleteUser, getUserById, listUsers, updateUser } from "../controllers/UserController.js";
 
 export const routes = [
   {
@@ -18,12 +18,12 @@ export const routes = [
   },
   {
     endpoint: '/users/:id',
-    method: 'UPDATE',
-    handler: listUsers
+    method: 'PUT',
+    handler: updateUser
   },
   {
     endpoint: '/users/:id',
     method: 'DELETE',
-    handler: listUsers
+    handler: deleteUser
   },
 ]
